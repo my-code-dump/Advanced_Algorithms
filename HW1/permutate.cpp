@@ -1,14 +1,21 @@
 #include "permutate.h"
 
-Permutate::Permutate(int &sz) {
+Permutate::Permutate(int sz, bool choice, int iterations) {
   vecN = sz;
   H = 0;
   HSquared = 0;
   variance = 0;
   expectation = 0;
   n = 1;
+  random = choice;
 
-  makeFac(sz);  
+  if (random) {
+    n = iterations;
+  }
+  else {
+    makeFac(sz);  
+  }
+
   initPermMe(sz);
 }
 
@@ -65,6 +72,17 @@ void Permutate::permutateArr () {
   } while(std::next_permutation(A.begin(),A.end()));
 }
 
+void Permutate::randomPermutateArr() {
+  std::vector<int> A = permMe;
+  std::random_device rd;
+  std::mt19937 g(rd());
+
+  for (int i = 0; i < 1000; i++) {
+    std::shuffle(A.begin(), A.end(), g);
+    hires(A);
+  }
+}
+
 void Permutate::calculateVE() {
   expectation = H/n;
   double expHSquared = HSquared/n;
@@ -72,8 +90,15 @@ void Permutate::calculateVE() {
 }
 
 void Permutate::runExperiment() {
+  if (random) {
+    std::cout << "Rand Permutations (" << n << " Iterations)" << std::endl;
+    randomPermutateArr();
+  }
+  else {
+    std::cout << "Full Permutations" << std::endl;
+    permutateArr();
+  }
   std::cout << "Size = " << vecN << std::endl;
-  permutateArr();
   calculateVE();
 }
 
@@ -83,5 +108,10 @@ double Permutate::getVariance() {
 
 double Permutate::getExpectation() {
   return expectation;
+}
+
+void Permutate::printBothResults() {
+  std::cout << "E[X] = " << getExpectation() << std::endl;
+  std::cout << " Var = " << getVariance() << std::endl;
 }
 

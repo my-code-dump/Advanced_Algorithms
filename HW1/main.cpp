@@ -3,11 +3,16 @@
 #include <algorithm>
 
 int main() {
-  int size = 8;
-  Permutate ex1 (size);
+  Permutate ex1 (8, false, 1000);
   ex1.runExperiment();
-  std::cout << "E[x] = " << ex1.getExpectation() << std::endl;
-  std::cout << " Var = " << ex1.getVariance() << std::endl;
+  ex1.printBothResults();
 
+  Permutate ex2 (8, true, 1000);
+  ex2.runExperiment();
+  ex2.printBothResults();
+  
+  Permutate ex3 (20, true, 1000);
+  ex3.runExperiment();
+  ex3.printBothResults();
   return 0;  
 }

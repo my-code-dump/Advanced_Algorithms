@@ -1,6 +1,7 @@
 #include <iostream> 
 #include <vector>
 #include <algorithm>
+#include <random>
 
 class Permutate{
   private:
@@ -9,13 +10,15 @@ class Permutate{
     double HSquared;
     double variance;
     double expectation;
-    int vecN;
     std::vector<int> permMe;
     void makeFac(int x);
     void initPermMe(int x);
+    int vecN;
+    int trials;
+    bool random;
 
   public:
-    Permutate(int &);
+    Permutate(int , bool , int );
     
     long getFac ();
 
@@ -25,6 +28,8 @@ class Permutate{
 
     void permutateArr ();
 
+    void randomPermutateArr ();
+
     void calculateVE();
 
     void runExperiment();
@@ -32,6 +37,8 @@ class Permutate{
     double getVariance();
 
     double getExpectation();
+
+    void printBothResults();
 
 };
 
