@@ -4,11 +4,12 @@
 
 class Permutate{
   private:
-    long n;
-    long H;
-    long HSquared;
-    float variance;
-    float expectation;
+    double n;
+    double H;
+    double HSquared;
+    double variance;
+    double expectation;
+    int vecN;
     std::vector<int> permMe;
     void makeFac(int x);
     void initPermMe(int x);
@@ -26,8 +27,11 @@ class Permutate{
 
     void calculateVE();
 
-    float getVariance();
+    void runExperiment();
 
-    float getExpectation();
+    double getVariance();
+
+    double getExpectation();
+
 };
 

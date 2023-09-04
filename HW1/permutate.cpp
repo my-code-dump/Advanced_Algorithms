@@ -1,6 +1,7 @@
 #include "permutate.h"
 
 Permutate::Permutate(int &sz) {
+  vecN = sz;
   H = 0;
   HSquared = 0;
   variance = 0;
@@ -42,19 +43,19 @@ void Permutate::printVector(std::vector<int> &x) {
   std::cout << std::endl;
 }
 
-void Permutate::hires (std::vector<int> &hires) {
-  int limit = hires.size();
+void Permutate::hires (std::vector<int> &hireList) {
+  int limit = hireList.size();
   int youreHired = 1;
-  int max = hires[0];
+  int max = hireList[0];
   
-  for (int i = 0; i < limit; i++) {
-    if (hires[i] > max) {
-      max = hires[i];
+  for (int i = 1; i < limit; i++) {
+    if (hireList[i] > max) {
+      max = hireList[i];
       youreHired++;
     }   
   }
-  H += youreHired;
-  HSquared += (youreHired * youreHired);
+  H += (double) youreHired;
+  HSquared += (double) (youreHired * youreHired);
 }
 
 void Permutate::permutateArr () {
@@ -65,23 +66,22 @@ void Permutate::permutateArr () {
 }
 
 void Permutate::calculateVE() {
-  expectation = (float) H/n;
-  float expHSquared = (float) HSquared/n;
-  variance = expHSquared - expectation;
+  expectation = H/n;
+  double expHSquared = HSquared/n;
+  variance = expHSquared - (expectation * expectation);
 }
 
-float Permutate::getVariance() {
-  if (variance == 0) {
-    permutateArr();
-    calculateVE();
-  }
+void Permutate::runExperiment() {
+  std::cout << "Size = " << vecN << std::endl;
+  permutateArr();
+  calculateVE();
+}
+
+double Permutate::getVariance() {
   return variance;
 }
 
-float Permutate::getExpectation() {
-  if (expectation == 0) {
-    permutateArr();
-    calculateVE();
-  }
+double Permutate::getExpectation() {
   return expectation;
 }
+
