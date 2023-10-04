@@ -25,10 +25,14 @@ int partition(std::vector<int> &A, int p, int r) {
 }
 
 int randomized_partition(std::vector<int> &A, int p, int r) {
+    // Randomizer, pick a number between [p,r]
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(p,r);
 
+    // Randomized index i
+    // A[i] will be exhange with A[r] to create a randomized effect while
+    // keeping the QS functions the same
     int i = dis(gen);
     int temp = A[r];
     A[r] = A[i];
