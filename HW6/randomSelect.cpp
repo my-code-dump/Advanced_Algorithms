@@ -91,7 +91,7 @@ void tExperiment (std::vector<int> A, int i, float trials) {
     }
     float avgRPCalls = count / trials;
     std::cout << "Average R-Select Random Partition call for " 
-        << trials << " = " << avgRPCalls << std::endl; 
+        << trials << " trials = " << avgRPCalls << std::endl; 
 }
 
 int main() {
